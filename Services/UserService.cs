@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using TreainBookingApi.Authorization;
 using TreainBookingApi.Entities;
 using TreainBookingApi.Helpers;
@@ -11,7 +12,7 @@ namespace TreainBookingApi.Services
     {
         AuthenticateResponse Authenticate(AuthenticateRequest model);
 
-        Task CreateNormalUser(AddUserRequest user);
+        Task<AuthenticateResponse> CreateNormalUser(AddUserRequest user);
 
         IEnumerable<User> GetAll();
 
@@ -60,17 +61,25 @@ namespace TreainBookingApi.Services
             return user;
         }
 
-        public async Task CreateNormalUser(AddUserRequest user)
+        public async Task<AuthenticateResponse> CreateNormalUser(AddUserRequest user)
         {
+            var Exsisting = await _context.Users.FirstOrDefaultAsync(x => x.Username == user.Username);
+            if (Exsisting != null)
+            {
+                throw new AppException("User already Exsist");
+            }
+
             var newUser = new User
             {
                 FirstName = user.FirstName,
                 LastName = user?.LastName,
-                Username = user.Username,
+                Username = user.Username.ToLower(),
                 Role = user.Role,
                 CreditCard = user.CreditCard,
                 Address = user.Address,
                 PasswordHash = BCryptNet.HashPassword(user.Password),
+                Nic = user.Nic,
+                PhoneNo = user.PhoneNo,
                 CreatedBy = "aDMIN",
                 UpdatedBy = "aDMIN",
                 CreatedDate = DateTime.UtcNow
@@ -79,6 +88,7 @@ namespace TreainBookingApi.Services
             {
                 await _context.Users.AddAsync(newUser);
                 await _context.SaveChangesAsync();
+                return this.Authenticate(new AuthenticateRequest { Username = user.Username, Password = user.Password });
             }
             catch (Exception ex)
             {

@@ -2,8 +2,9 @@
 
 namespace TreainBookingApi.Entities
 {
-    public class TrainRoute : EntityBase
+    public class TrainSchedule : EntityBase
     {
+
         public int AvailableSeats { get; set; }
         public bool SeatsTaken { get; set; }
 
@@ -14,9 +15,6 @@ namespace TreainBookingApi.Entities
         public string ArrivalCity { get; set; }
         public DateTime DepartureTime { get; set; }
         public DateTime ArrivalTime { get; set; }
-        public decimal PricePerSeat { get; set; }
-        public string WayStationsArray { get; set; }
-
-        public Train Train { get; set; }
+        public virtual Train Train { get; set; }
     }
 }

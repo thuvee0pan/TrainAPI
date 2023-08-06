@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "QTA9B1RkiJEhqMbNm+YUcL696proTQK6xwOLb3FLAyXX1iZ8QJxOJZ508OHcTEe5uCpE2Dfap93wqfjtNh7Vpg==",
+  "dgSpecHash": "7UzzcsgGIiha9bBHxU/lI/yqnFIeR78qaogT+4h0UWRrlP05/Aq07RaO//Ptz/RSkwB0huRBAAamrMRsSWZXYw==",
   "success": true,
   "projectFilePath": "D:\\Personal\\TreainBookingApi\\TreainBookingApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PaheerathanThuveepan\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\PaheerathanThuveepan\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\PaheerathanThuveepan\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\PaheerathanThuveepan\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\PaheerathanThuveepan\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",

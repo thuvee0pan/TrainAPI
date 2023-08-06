@@ -13,6 +13,8 @@ namespace TreainBookingApi.Models.Users
         public string CreditCard { get; set; }
         public string Address { get; set; }
 
+        public string Nic { get; set; }
+        public string PhoneNo { get; set; }
         public AuthenticateResponse(User user, string token)
         {
             Id = user.Id;
@@ -22,6 +24,8 @@ namespace TreainBookingApi.Models.Users
             CreditCard = user.CreditCard;
             Address = user.Address;
             Role = user.Role ?? Role.User;
+            Nic = user.Nic;
+            PhoneNo = user.PhoneNo;
             Token = token;
         }
     }

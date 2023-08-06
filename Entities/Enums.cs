@@ -2,7 +2,14 @@
 {
     public enum Role
     {
-        Admin,
-        User
+        Admin = 0,
+        User = 1
+    }
+
+    public enum ClassType
+    {
+        FirstClass = 0,
+        SecoundClass = 1,
+        thirdClass = 2
     }
 }

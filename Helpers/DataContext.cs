@@ -13,11 +13,10 @@ namespace TreainBookingApi.Helpers
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Locomotive> Locomotive { get; set; }
-        public DbSet<Purchese> Purchese { get; set; }
-        public DbSet<RailroadCar> RailroadCar { get; set; }
-        public DbSet<TrainRoute> TrainRoute { get; set; }
+        public DbSet<Booking> Booking { get; set; }
+        public DbSet<TrainSchedule> TrainSchedule { get; set; }
         public DbSet<Train> Train { get; set; }
+        public DbSet<Passanger> Passanger { get; set; }
 
         public override int SaveChanges()
         {

@@ -22,7 +22,7 @@ namespace TreainBookingApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TreainBookingApi.Entities.Locomotive", b =>
+            modelBuilder.Entity("TreainBookingApi.Entities.Booking", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,58 +30,29 @@ namespace TreainBookingApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("Name")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("UpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Locomotive");
-                });
-
-            modelBuilder.Entity("TreainBookingApi.Entities.Purchese", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("ClassType")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("Paid")
+                    b.Property<bool>("IsPaid")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("PassengerCount")
+                        .HasColumnType("int");
 
-                    b.Property<string>("SeatsArray")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TrainRouteId")
+                    b.Property<int>("TrainScheduleId")
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -90,19 +61,16 @@ namespace TreainBookingApi.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("railroadCarNumber")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TrainRouteId");
+                    b.HasIndex("TrainScheduleId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Purchese");
+                    b.ToTable("Booking");
                 });
 
-            modelBuilder.Entity("TreainBookingApi.Entities.RailroadCar", b =>
+            modelBuilder.Entity("TreainBookingApi.Entities.Passanger", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,25 +78,28 @@ namespace TreainBookingApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BookingId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NumberOfColums")
-                        .HasColumnType("int");
+                    b.Property<string>("Nic")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NumberOfRows")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -136,7 +107,9 @@ namespace TreainBookingApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RailroadCar");
+                    b.HasIndex("BookingId");
+
+                    b.ToTable("Passanger");
                 });
 
             modelBuilder.Entity("TreainBookingApi.Entities.Train", b =>
@@ -147,29 +120,26 @@ namespace TreainBookingApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("ClassType")
+                        .HasColumnType("int");
+
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Locomotive")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("RailroadCarAmount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("PricePerSeat")
+                        .HasColumnType("int");
 
-                    b.Property<int>("RailroadCarId")
+                    b.Property<int>("TotalSeats")
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -177,12 +147,10 @@ namespace TreainBookingApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RailroadCarId");
-
                     b.ToTable("Train");
                 });
 
-            modelBuilder.Entity("TreainBookingApi.Entities.TrainRoute", b =>
+            modelBuilder.Entity("TreainBookingApi.Entities.TrainSchedule", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -201,10 +169,9 @@ namespace TreainBookingApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DepartureCity")
@@ -214,9 +181,6 @@ namespace TreainBookingApi.Migrations
                     b.Property<DateTime>("DepartureTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("PricePerSeat")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<bool>("SeatsTaken")
                         .HasColumnType("bit");
 
@@ -224,21 +188,16 @@ namespace TreainBookingApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("WayStationsArray")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TrainId");
 
-                    b.ToTable("TrainRoute");
+                    b.ToTable("TrainSchedule");
                 });
 
             modelBuilder.Entity("TreainBookingApi.Entities.User", b =>
@@ -254,10 +213,9 @@ namespace TreainBookingApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreditCard")
@@ -272,7 +230,15 @@ namespace TreainBookingApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Nic")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -280,7 +246,6 @@ namespace TreainBookingApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -295,11 +260,11 @@ namespace TreainBookingApi.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("TreainBookingApi.Entities.Purchese", b =>
+            modelBuilder.Entity("TreainBookingApi.Entities.Booking", b =>
                 {
-                    b.HasOne("TreainBookingApi.Entities.TrainRoute", "TrainRoute")
+                    b.HasOne("TreainBookingApi.Entities.TrainSchedule", "TrainSchedule")
                         .WithMany()
-                        .HasForeignKey("TrainRouteId")
+                        .HasForeignKey("TrainScheduleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -309,23 +274,23 @@ namespace TreainBookingApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TrainRoute");
+                    b.Navigation("TrainSchedule");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TreainBookingApi.Entities.Train", b =>
+            modelBuilder.Entity("TreainBookingApi.Entities.Passanger", b =>
                 {
-                    b.HasOne("TreainBookingApi.Entities.RailroadCar", "RailroadCar")
-                        .WithMany()
-                        .HasForeignKey("RailroadCarId")
+                    b.HasOne("TreainBookingApi.Entities.Booking", "Booking")
+                        .WithMany("Passangers")
+                        .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("RailroadCar");
+                    b.Navigation("Booking");
                 });
 
-            modelBuilder.Entity("TreainBookingApi.Entities.TrainRoute", b =>
+            modelBuilder.Entity("TreainBookingApi.Entities.TrainSchedule", b =>
                 {
                     b.HasOne("TreainBookingApi.Entities.Train", "Train")
                         .WithMany()
@@ -334,6 +299,11 @@ namespace TreainBookingApi.Migrations
                         .IsRequired();
 
                     b.Navigation("Train");
+                });
+
+            modelBuilder.Entity("TreainBookingApi.Entities.Booking", b =>
+                {
+                    b.Navigation("Passangers");
                 });
 #pragma warning restore 612, 618
         }

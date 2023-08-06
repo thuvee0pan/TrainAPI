@@ -1,16 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace TreainBookingApi.Entities
+﻿namespace TreainBookingApi.Entities
 {
     public class Train : EntityBase
     {
         public string Name { get; set; }
-        public string Locomotive { get; set; }
-
-        [ForeignKey("RailroadCar")]
-        public int RailroadCarId { get; set; }
-
-        public virtual RailroadCar RailroadCar { get; set; }
-        public decimal RailroadCarAmount { get; set; }
+        public ClassType ClassType { get; set; }
+        public int TotalSeats { get; set; }
+        public int PricePerSeat { get; set; }
     }
 }

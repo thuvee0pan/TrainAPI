@@ -38,9 +38,8 @@ namespace TreainBookingApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateNormalUser(AddUserRequest user)
         {
-            user.Role = Role.User;
-            await _userService.CreateNormalUser(user);
-            return Ok();
+            var response = await _userService.CreateNormalUser(user);
+            return Ok(response);
         }
 
         [HttpGet("{id:int}")]
